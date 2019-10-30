@@ -1,8 +1,8 @@
 include: "//@{CONFIG_PROJECT_NAME}/balance_sheet.view"
 
-# view: balance_sheet {
-#   extends: [balance_sheet_config]
-# }
+view: balance_sheet {
+  extends: [balance_sheet_config]
+}
 
 view: balance_sheet_core {
   derived_table: {

@@ -1,8 +1,8 @@
 include: "//@{CONFIG_PROJECT_NAME}/transactions_with_converted_amounts.view"
 
-# view: transactions_with_converted_amounts {
-#   extends: [transactions_with_converted_amounts_config]
-# }
+view: transactions_with_converted_amounts {
+  extends: [transactions_with_converted_amounts_config]
+}
 
 view: transactions_with_converted_amounts_core {
   derived_table: {

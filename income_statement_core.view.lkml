@@ -1,8 +1,8 @@
 include: "//@{CONFIG_PROJECT_NAME}/income_statement.view"
 
-# view: income_statement {
-#   extends: [income_statement_config]
-# }
+view: income_statement {
+  extends: [income_statement_config]
+}
 
 view: income_statement_core {
   derived_table: {

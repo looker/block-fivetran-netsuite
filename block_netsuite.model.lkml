@@ -2,15 +2,16 @@ connection: "private_internal" #this needs to be personalized
 
 include: "*.view.lkml"                       # include all views in this project
 include: "*.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+include: "*.explore.lkml"
 
 explore: balance_sheet {
-  label: "Balance Sheet"
+  extends: [balance_sheet_config]
 }
 
 explore: income_statement {
-  label: "Income Statement"
+  extends: [income_statement_config]
 }
 
 explore: transaction_details {
-  label: "Transaction Details"
+  extends: [transaction_details_config]
 }
