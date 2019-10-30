@@ -9,17 +9,17 @@ view: transactions_with_converted_amounts {
           consolidated_exchange_rates.historical_rate,
           consolidated_exchange_rates.from_subsidiary_id,
           consolidated_exchange_rates.to_subsidiary_id
-        from netsuite.consolidated_exchange_rates
+        from @{SCHEMA_NAME}.consolidated_exchange_rates
         where consolidated_exchange_rates.to_subsidiary_id in (
           select
             subsidiary_id
-          from netsuite.subsidiaries
+          from @{SCHEMA_NAME}.subsidiaries
           where parent_id is null  -- constrait - only the primary subsidiary has no parent
           )
           and consolidated_exchange_rates.accounting_book_id in (
             select
               accounting_book_id
-            from netsuite.accounting_books
+            from @{SCHEMA_NAME}.accounting_books
             where lower(is_primary) = 'yes'
             )
           and not consolidated_exchange_rates._fivetran_deleted
@@ -35,7 +35,7 @@ view: transactions_with_converted_amounts {
             when lower(accounts.general_rate_type) = 'average' then period_exchange_rate_map.average_rate
             else null
             end as exchange_rate
-        from netsuite.accounts
+        from @{SCHEMA_NAME}.accounts
         cross join period_exchange_rate_map
       ), transaction_lines_w_accounting_period as ( -- transaction line totals, by accounts, accounting period and subsidiary
         select
@@ -45,8 +45,8 @@ view: transactions_with_converted_amounts {
           transaction_lines.account_id,
           transactions.accounting_period_id as transaction_accounting_period_id,
           coalesce(transaction_lines.amount, 0) as unconverted_amount
-        from netsuite.transaction_lines
-        join netsuite.transactions on transactions.transaction_id = transaction_lines.transaction_id
+        from @{SCHEMA_NAME}.transaction_lines
+        join @{SCHEMA_NAME}.transactions on transactions.transaction_id = transaction_lines.transaction_id
         where not transactions._fivetran_deleted
           and lower(transactions.transaction_type) != 'revenue arrangement'
           and lower(non_posting_line) != 'yes'
@@ -54,8 +54,8 @@ view: transactions_with_converted_amounts {
         select
           base.accounting_period_id,
           array_agg(multiplier.accounting_period_id order by multiplier.accounting_period_id) as accounting_periods_to_include_for
-        from netsuite.accounting_periods as base
-        join netsuite.accounting_periods as multiplier
+        from @{SCHEMA_NAME}.accounting_periods as base
+        join @{SCHEMA_NAME}.accounting_periods as multiplier
           on multiplier.starting >= base.starting
           and multiplier.quarter = base.quarter
           and multiplier.year_0 = base.year_0
@@ -65,7 +65,7 @@ view: transactions_with_converted_amounts {
           and lower(base.year_0) = 'no'
           and base.fiscal_calendar_id = (select
                                            fiscal_calendar_id
-                                         from netsuite.subsidiaries
+                                         from @{SCHEMA_NAME}.subsidiaries
                                          where parent_id is null) -- fiscal calendar will align with parent subsidiary's default calendar
         group by 1
       ), transactions_in_every_calculation_period as (
@@ -109,7 +109,7 @@ view: transactions_with_converted_amounts {
           when lower(accounts.type_name) in ('equity', 'retained earnings', 'net income') then 'Equity'
           else null end as account_category
       from transactions_in_every_calculation_period_w_exchange_rates
-      left join netsuite.accounts on accounts.account_id = transactions_in_every_calculation_period_w_exchange_rates.account_id
+      left join @{SCHEMA_NAME}.accounts on accounts.account_id = transactions_in_every_calculation_period_w_exchange_rates.account_id
        ;;
   }
 }

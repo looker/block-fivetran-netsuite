@@ -62,35 +62,35 @@ view: transaction_details {
           when date_diff(current_date, date(transactions.due_date), day)  >= 90 then '>= 90.0'
           else 'Undefined'
           end as days_past_due_date_tier
-      from netsuite.transaction_lines
-      join netsuite.transactions on transactions.transaction_id = transaction_lines.transaction_id
+      from @{SCHEMA_NAME}.transaction_lines
+      join @{SCHEMA_NAME}.transactions on transactions.transaction_id = transaction_lines.transaction_id
         and not transactions._fivetran_deleted
       left join ${transactions_with_converted_amounts.SQL_TABLE_NAME} as transactions_with_converted_amounts
         on transactions_with_converted_amounts.transaction_line_id = transaction_lines.transaction_line_id
         and transactions_with_converted_amounts.transaction_id = transaction_lines.transaction_id
         and transactions_with_converted_amounts.transaction_accounting_period_id = transactions_with_converted_amounts.reporting_accounting_period_id
-      left join netsuite.accounts on accounts.account_id = transaction_lines.account_id
-      left join netsuite.accounts as parent_account on parent_account.account_id = accounts.parent_id
-      left join netsuite.accounting_periods on accounting_periods.accounting_period_id = transactions.accounting_period_id
-      left join netsuite.income_accounts on income_accounts.income_account_id = accounts.account_id
-      left join netsuite.expense_accounts on expense_accounts.expense_account_id = accounts.account_id
-      left join netsuite.customers on customers.customer_id = transaction_lines.company_id
+      left join @{SCHEMA_NAME}.accounts on accounts.account_id = transaction_lines.account_id
+      left join @{SCHEMA_NAME}.accounts as parent_account on parent_account.account_id = accounts.parent_id
+      left join @{SCHEMA_NAME}.accounting_periods on accounting_periods.accounting_period_id = transactions.accounting_period_id
+      left join @{SCHEMA_NAME}.income_accounts on income_accounts.income_account_id = accounts.account_id
+      left join @{SCHEMA_NAME}.expense_accounts on expense_accounts.expense_account_id = accounts.account_id
+      left join @{SCHEMA_NAME}.customers on customers.customer_id = transaction_lines.company_id
         and not customers._fivetran_deleted
-      left join netsuite.items on items.item_id = transaction_lines.item_id
+      left join @{SCHEMA_NAME}.items on items.item_id = transaction_lines.item_id
         and not items._fivetran_deleted
-      left join netsuite.locations on locations.location_id = transaction_lines.location_id
-      left join netsuite.vendors on vendors.vendor_id = transaction_lines.company_id
+      left join @{SCHEMA_NAME}.locations on locations.location_id = transaction_lines.location_id
+      left join @{SCHEMA_NAME}.vendors on vendors.vendor_id = transaction_lines.company_id
         and not vendors._fivetran_deleted
-      left join netsuite.vendor_types on vendor_types.vendor_type_id = vendors.vendor_type_id
+      left join @{SCHEMA_NAME}.vendor_types on vendor_types.vendor_type_id = vendors.vendor_type_id
         and not vendor_types._fivetran_deleted
-      left join netsuite.currencies on currencies.currency_id = transactions.currency_id
+      left join @{SCHEMA_NAME}.currencies on currencies.currency_id = transactions.currency_id
         and not currencies._fivetran_deleted
-      left join netsuite.departments on departments.department_id = transaction_lines.department_id
-      left join netsuite.subsidiaries on subsidiaries.subsidiary_id = transaction_lines.subsidiary_id
+      left join @{SCHEMA_NAME}.departments on departments.department_id = transaction_lines.department_id
+      left join @{SCHEMA_NAME}.subsidiaries on subsidiaries.subsidiary_id = transaction_lines.subsidiary_id
       where (accounting_periods.fiscal_calendar_id is null
         or accounting_periods.fiscal_calendar_id  = (select
                                                       fiscal_calendar_id
-                                                    from netsuite.subsidiaries
+                                                    from @{SCHEMA_NAME}.subsidiaries
                                                     where parent_id is null))
        ;;
   }
