@@ -4,7 +4,7 @@
   elements:
   - title: Expenses by Account Group
     name: Expenses by Account Group
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     type: looker_column
     fields: [transaction_details.parent_account_name, transaction_details.sum_transaction_converted_amount,
@@ -67,7 +67,7 @@
     height: 9
   - title: Expenses by Location
     name: Expenses by Location
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     type: looker_bar
     fields: [transaction_details.sum_transaction_converted_amount, transaction_details.location_name]
@@ -127,7 +127,7 @@
     height: 9
   - title: Expenses by Department
     name: Expenses by Department
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     type: looker_bar
     fields: [transaction_details.sum_transaction_converted_amount, transaction_details.department_name]
@@ -187,7 +187,7 @@
     height: 9
   - title: Expenses over last 7 days
     name: Expenses over last 7 days
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     type: table
     fields: [transaction_details.transaction_date, transaction_details.transaction_id,
@@ -262,7 +262,7 @@
     default_value: 6 months
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.transaction_date
@@ -272,7 +272,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.department_name
@@ -282,7 +282,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.parent_account_name
@@ -292,7 +292,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.location_name
@@ -302,7 +302,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.subsidiary_name
@@ -312,7 +312,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_account_intercompany
@@ -322,7 +322,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_transaction_intercompany

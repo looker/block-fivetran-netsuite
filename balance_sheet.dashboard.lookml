@@ -20,7 +20,7 @@
     height: 2
   - title: Summary
     name: Summary
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: looker_grid
     fields: [balance_sheet.balance_sheet_sort_helper, balance_sheet_category, balance_sheet.account_type_name,
@@ -71,7 +71,7 @@
     height: 7
   - title: Asset
     name: Asset
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: single_value
     fields: [balance_sheet.sum_converted_amount]
@@ -105,7 +105,7 @@
     height: 7
   - title: Liabilities
     name: Liabilities
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: single_value
     fields: [balance_sheet.sum_converted_amount]
@@ -139,7 +139,7 @@
     height: 3
   - title: Equity
     name: Equity
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: single_value
     fields: [balance_sheet.sum_converted_amount]
@@ -181,7 +181,7 @@
     height: 2
   - title: Assets
     name: Assets
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: looker_grid
     fields: [balance_sheet.balance_sheet_sort_helper, balance_sheet.account_type_name,
@@ -241,7 +241,7 @@
     height: 20
   - title: Liabilities & Equity
     name: Liabilities & Equity
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     type: looker_grid
     fields: [balance_sheet.balance_sheet_sort_helper, balance_sheet.account_type_name,
@@ -306,7 +306,7 @@
     default_value: 6 months ago for 6 months
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     listens_to_filters: []
     field: balance_sheet.accounting_period_ending_month
@@ -316,7 +316,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: netsuite
+    model: block_netsuite
     explore: balance_sheet
     listens_to_filters: []
     field: balance_sheet.is_accounting_period_closed
