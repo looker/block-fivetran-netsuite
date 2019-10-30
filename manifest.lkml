@@ -21,4 +21,8 @@ constant: SCHEMA_NAME {
 
 local_dependency: {
   project: "@{CONFIG_PROJECT_NAME}"
+
+  override_constant: SCHEMA_NAME {
+    value: "@{SCHEMA_NAME}"
+  }
 }
