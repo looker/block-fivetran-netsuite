@@ -8,12 +8,12 @@ constant: CONFIG_PROJECT_NAME {
 }
 
 constant: CONNECTION_NAME {
-  value: "select"
+  value: "fivetran_looker_blocks_demo"
   export: override_required
 }
 
 constant: SCHEMA_NAME {
-  value: "netsuite"
+  value: "netsuite_suiteanalytics"
   export: override_required
 }
 
