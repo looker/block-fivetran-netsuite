@@ -61,11 +61,22 @@ view: transaction_details_core {
           else transaction_lines.amount
           end as transaction_amount,
         case
+
+        {% if _dialect._name == 'bigquery_standard_sql' %}
           when date_diff(current_date, date(transactions.due_date), day)  < 0 then '< 0.0'
           when date_diff(current_date, date(transactions.due_date), day)  >= 0 and date_diff(current_date, date(transactions.due_date), day)  < 30 then '>= 0.0 and < 30.0'
           when date_diff(current_date, date(transactions.due_date), day)  >= 30 and date_diff(current_date, date(transactions.due_date), day)  < 60 then '>= 30.0 and < 60.0'
           when date_diff(current_date, date(transactions.due_date), day)  >= 60 and date_diff(current_date, date(transactions.due_date), day)  < 90 then '>= 60.0 and < 90.0'
           when date_diff(current_date, date(transactions.due_date), day)  >= 90 then '>= 90.0'
+
+        {% elsif _dialect._name == 'snowflake' %}
+          when datediff(day, to_date(due_date), current_date)  < 0 then '< 0.0'
+          when datediff(day, to_date(due_date), current_date)  >= 0 and datediff(day, to_date(due_date), current_date)  < 30 then '>= 0.0 and < 30.0'
+          when datediff(day, to_date(due_date), current_date)  >= 30 and datediff(day, to_date(due_date), current_date)  < 60 then '>= 30.0 and < 60.0'
+          when datediff(day, to_date(due_date), current_date)  >= 60 and datediff(day, to_date(due_date), current_date)  < 90 then '>= 60.0 and < 90.0'
+          when datediff(day, to_date(due_date), current_date)  >= 90 then '>= 90.0'
+        {% endif %}
+
           else 'Undefined'
           end as days_past_due_date_tier
       from @{SCHEMA_NAME}.transaction_lines

@@ -40,6 +40,8 @@ view: balance_sheet_core {
           else 0
           end as converted_amount,
         case
+
+        {% if _dialect._name == 'bigquery_standard_sql' %}
           when lower(accounts.type_name) = 'bank' then 1
           when lower(accounts.type_name) = 'accounts receivable' then 2
           when lower(accounts.type_name) = 'unbilled receivable' then 3
@@ -53,6 +55,23 @@ view: balance_sheet_core {
           when lower(accounts.type_name) = 'long term liability' then 11
           when lower(accounts.type_name) = 'deferred revenue' then 12
           when lower(accounts.type_name) = 'equity' then 13
+
+        {% elsif _dialect._name == 'snowflake' %}
+          when lower(account_type_name) = 'bank' then 1
+          when lower(account_type_name) = 'accounts receivable' then 2
+          when lower(account_type_name) = 'unbilled receivable' then 3
+          when lower(account_type_name) = 'other current asset' then 4
+          when lower(account_type_name) = 'fixed asset' then 5
+          when lower(account_type_name) = 'other asset' then 6
+          when lower(account_type_name) = 'deferred expense' then 7
+          when lower(account_type_name) = 'accounts payable' then 8
+          when lower(account_type_name) = 'credit card' then 9
+          when lower(account_type_name) = 'other current liability' then 10
+          when lower(account_type_name) = 'long term liability' then 11
+          when lower(account_type_name) = 'deferred revenue' then 12
+          when lower(account_type_name) = 'equity' then 13
+        {% endif %}
+
           when (lower(accounts.is_balancesheet) = 'f' and reporting_accounting_periods.year_id = transaction_accounting_periods.year_id) then 15
           when lower(accounts.is_balancesheet) = 'f' then 14
           else null
