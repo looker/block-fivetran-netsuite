@@ -1,9 +1,9 @@
 {
-  "label": "NetSuite",
+  "label": "Netsuite",
   "category_label": "Models",
   "branding": {
     "image_uri": "",
-    "tagline": "The Fivetran block for NetSuite lets you easily visualize and analyze your NetSuite data."
+    "tagline": "The Fivetran block for Netsuite lets you easily visualize and analyze your Netsuite data."
   },
 
     "constants": {
