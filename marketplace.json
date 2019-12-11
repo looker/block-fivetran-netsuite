@@ -1,9 +1,9 @@
 {
-  "label": "Netsuite by Fivetran",
+  "label": "NetSuite",
   "category_label": "Models",
   "branding": {
     "image_uri": "",
-    "tagline": "tagline"
+    "tagline": "The Fivetran block for NetSuite lets you easily visualize and analyze your NetSuite data."
   },
 
     "constants": {
@@ -20,7 +20,7 @@
     },
     "models": [
         {
-            "name": "block_snowflake_usage",
+            "name": "block_netsuite",
             "connection_constant": "CONNECTION_NAME"
         }
     ],
