@@ -27,7 +27,7 @@
     "auxiliary_projects": [
         {
             "git_uri": "git://github.com/looker/block-fivetran-netsuite-config.git",
-            "git_ref": "244623c6b14bd60b71e36b010c0e7db980d87625",
+            "git_ref": "0b94afa36bde4f547f0bdfeb902d7503940691bb",
             "label": "Netsuite by Fivetran Config",
             "constant_name": "CONFIG_PROJECT_NAME"
         }
