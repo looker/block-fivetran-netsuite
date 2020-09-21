@@ -117,7 +117,7 @@ view: transactions_with_converted_amounts_core {
             when lower(accounts.general_rate_type) = 'average' then period_exchange_rate_map.average_rate
             else null
             end as exchange_rate
-        from netsuite.accounts
+        from @{SCHEMA_NAME}.accounts
         cross join period_exchange_rate_map
       ), transaction_lines_w_accounting_period as ( -- transaction line totals, by accounts, accounting period and subsidiary
         select
@@ -127,8 +127,8 @@ view: transactions_with_converted_amounts_core {
           transaction_lines.account_id,
           transactions.accounting_period_id as transaction_accounting_period_id,
           coalesce(transaction_lines.amount, 0) as unconverted_amount
-        from netsuite.transaction_lines
-        join netsuite.transactions on transactions.transaction_id = transaction_lines.transaction_id
+        from @{SCHEMA_NAME}.transaction_lines
+        join @{SCHEMA_NAME}.transactions on transactions.transaction_id = transaction_lines.transaction_id
         where not transactions._fivetran_deleted
           and lower(transactions.transaction_type) != 'revenue arrangement'
           and lower(non_posting_line) != 'yes'
@@ -136,8 +136,8 @@ view: transactions_with_converted_amounts_core {
         select
           base.accounting_period_id,
           array_agg(multiplier.accounting_period_id) within group (order by multiplier.accounting_period_id) as accounting_periods_to_include_for
-        from netsuite.accounting_periods as base
-        join netsuite.accounting_periods as multiplier
+        from @{SCHEMA_NAME}.accounting_periods as base
+        join @{SCHEMA_NAME}.accounting_periods as multiplier
           on multiplier.starting >= base.starting
           and multiplier.quarter = base.quarter
           and multiplier.year_0 = base.year_0
@@ -147,7 +147,7 @@ view: transactions_with_converted_amounts_core {
           and lower(base.year_0) = 'no'
           and base.fiscal_calendar_id = (select
                                           fiscal_calendar_id
-                                        from netsuite.subsidiaries
+                                        from @{SCHEMA_NAME}.subsidiaries
                                         where parent_id is null) -- fiscal calendar will align with parent subsidiary's default calendar
         group by 1
       ), flattened_period_id_list_to_current_period as (
