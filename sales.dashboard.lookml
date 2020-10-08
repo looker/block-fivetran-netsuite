@@ -4,7 +4,7 @@
   elements:
   - title: Sales by Customer Country
     name: Sales by Customer Country
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: looker_bar
     fields: [transaction_details.sum_transaction_amount, transaction_details.customer_country]
@@ -64,7 +64,7 @@
     height: 8
   - title: Sales Orders, by Customer
     name: Sales Orders, by Customer
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: table
     fields: [transaction_details.customer_name, transaction_details.transaction_date,
@@ -99,7 +99,7 @@
     height: 7
   - title: Sales Orders, Popular Items
     name: Sales Orders, Popular Items
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: table
     fields: [transaction_details.item_name, transaction_details.sum_transaction_amount,
@@ -160,7 +160,7 @@
     height: 7
   - title: Sales by Customer State
     name: Sales by Customer State
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: looker_bar
     fields: [transaction_details.customer_state, transaction_details.sum_transaction_amount]
@@ -220,7 +220,7 @@
     height: 8
   - title: 'Sales Orders: Pending Approval'
     name: 'Sales Orders: Pending Approval'
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: table
     fields: [transaction_details.customer_name, transaction_details.transaction_id,
@@ -256,7 +256,7 @@
     height: 7
   - title: 'Sales Orders: Pending Billing'
     name: 'Sales Orders: Pending Billing'
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     type: table
     fields: [transaction_details.customer_name, transaction_details.transaction_id,
@@ -298,7 +298,7 @@
     default_value: 6 weeks
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.transaction_date
@@ -308,7 +308,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.item_name
@@ -318,7 +318,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.customer_name
@@ -328,7 +328,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_account_intercompany
@@ -338,7 +338,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_transaction_intercompany
@@ -348,7 +348,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: netsuite_spreedly
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.subsidiary_name
