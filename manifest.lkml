@@ -1,14 +1,14 @@
-project_name: "block-fivetran-netsuite"
+project_name: "block-fivetran-netsuite-spreedly"
 
 ################ Constants ################
 
 constant: CONFIG_PROJECT_NAME {
-  value: "block-fivetran-netsuite-config"
-  export: override_required
+  value: "block-fivetran-netsuite-config-spreedly"
+  export: none
 }
 
 constant: CONNECTION_NAME {
-  value: "select"
+  value: "snowflake"
   export: override_required
 }
 
@@ -19,10 +19,10 @@ constant: SCHEMA_NAME {
 
 ################ Dependencies ################
 
-local_dependency: {
-  project: "@{CONFIG_PROJECT_NAME}"
+# local_dependency: {
+#   project: "@{CONFIG_PROJECT_NAME}"
 
-  override_constant: SCHEMA_NAME {
-    value: "@{SCHEMA_NAME}"
-  }
-}
+#   override_constant: SCHEMA_NAME {
+#     value: "@{SCHEMA_NAME}"
+#   }
+# }

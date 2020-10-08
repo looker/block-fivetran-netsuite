@@ -1,10 +1,5 @@
-include: "//@{CONFIG_PROJECT_NAME}/transaction_details.view"
 
 view: transaction_details {
-  extends: [transaction_details_config]
-}
-
-view: transaction_details_core {
   derived_table: {
     sql:
       select
