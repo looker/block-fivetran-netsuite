@@ -790,7 +790,7 @@ view: items {
     sql: ${TABLE}."SALE_UNIT_ID" ;;
   }
 
-  dimension: salesdescription {
+  dimension: sales_description {
     type: string
     sql: ${TABLE}."SALESDESCRIPTION" ;;
   }

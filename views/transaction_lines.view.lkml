@@ -58,6 +58,14 @@ view: transaction_lines {
     sql: ${TABLE}."AMOUNT" ;;
   }
 
+  dimension: transaction_amount {
+    type: number
+    sql: case
+          when lower(${accounts.type_name}) = 'income' or lower(${accounts.type_name}) = 'other income' then -${amount}
+          else ${amount}
+          end ;;
+  }
+
   dimension: amount_foreign {
     type: number
     sql: ${TABLE}."AMOUNT_FOREIGN" ;;
@@ -552,6 +560,10 @@ view: transaction_lines {
   dimension: non_posting_line {
     type: string
     sql: ${TABLE}."NON_POSTING_LINE" ;;
+  }
+  dimension: is_transaction_non_posting {
+    type: yesno
+    sql: lower(${non_posting_line})='yes' ;;
   }
 
   dimension: notc_id {

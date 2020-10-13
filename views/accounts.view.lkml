@@ -43,7 +43,7 @@ view: accounts {
     sql: ${TABLE}."ACCOUNT_SUBGROUP_ID" ;;
   }
 
-  dimension: accountnumber {
+  dimension: account_number {
     type: string
     sql: ${TABLE}."ACCOUNTNUMBER" ;;
   }
@@ -161,6 +161,11 @@ view: accounts {
     sql: ${TABLE}."IS_LEFTSIDE" ;;
   }
 
+  dimension: is_account_leftside {
+    type: yesno
+    sql: lower(${is_leftside})='t' ;;
+  }
+
   dimension: is_summary {
     type: string
     sql: ${TABLE}."IS_SUMMARY" ;;
@@ -186,6 +191,16 @@ view: accounts {
     sql: ${TABLE}."NAME" ;;
   }
 
+  dimension: parent_account_name {
+    type: string
+    sql: coalesce(${parent_account.name},${accounts.name}) ;;
+  }
+
+  dimension: is_account_intercompany {
+    type: yesno
+    sql: lower(${name}) like '%intercompany%' ;;
+  }
+
   dimension: openbalance {
     type: number
     sql: ${TABLE}."OPENBALANCE" ;;
@@ -199,6 +214,16 @@ view: accounts {
   dimension: type_name {
     type: string
     sql: ${TABLE}."TYPE_NAME" ;;
+  }
+
+  dimension: is_accounts_payable {
+    type: yesno
+    sql: lower(${type_name}) like 'accounts payable%' ;;
+  }
+
+  dimension: is_accounts_receivable {
+    type: yesno
+    sql: lower(${type_name}) like 'accounts receivable%' ;;
   }
 
   dimension: type_sequence {

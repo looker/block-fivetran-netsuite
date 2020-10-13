@@ -33,6 +33,11 @@ view: accounting_periods {
     sql: ${TABLE}."CLOSED" ;;
   }
 
+  dimension: is_accounting_period_closed {
+    type: yesno
+    sql: lower(${closed})='yes' ;;
+  }
+
   dimension: closed_accounts_payable {
     type: string
     sql: ${TABLE}."CLOSED_ACCOUNTS_PAYABLE" ;;
@@ -127,6 +132,11 @@ view: accounting_periods {
   dimension: is_adjustment {
     type: string
     sql: ${TABLE}."IS_ADJUSTMENT" ;;
+  }
+
+  dimension: is_accounting_period_adjustment {
+    type: yesno
+    sql: lower(${is_adjustment})='yes' ;;
   }
 
   dimension: isinactive {

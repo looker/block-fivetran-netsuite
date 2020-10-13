@@ -9,6 +9,11 @@ view: expense_accounts {
     sql: ${TABLE}."EXPENSE_ACCOUNT_ID" ;;
   }
 
+  dimension: is_expense_account {
+    type: yesno
+    sql: ${expense_account_id} is not null ;;
+  }
+
   dimension: _fivetran_deleted {
     type: yesno
     sql: ${TABLE}."_FIVETRAN_DELETED" ;;

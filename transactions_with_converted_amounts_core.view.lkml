@@ -210,6 +210,14 @@ view: transactions_with_converted_amounts {
     sql: ${TABLE}."CONVERTED_AMOUNT_USING_TRANSACTION_ACCOUNTING_PERIOD" ;;
   }
 
+  dimension: converted_amount {
+    type: number
+    sql: case
+          when lower(${accounts.type_name}) = 'income' or lower(${accounts.type_name}) = 'other income' then -${converted_amount_using_transaction_accounting_period}
+          else ${converted_amount_using_transaction_accounting_period}
+          end ;;
+  }
+
   dimension: is_income_statement {
     type: string
     sql: ${TABLE}."IS_INCOME_STATEMENT" ;;

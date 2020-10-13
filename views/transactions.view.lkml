@@ -450,6 +450,17 @@ view: transactions {
     sql: CAST(${TABLE}."DUE_DATE" AS TIMESTAMP_NTZ) ;;
   }
 
+  dimension: days_past_due_date_tier {
+    type: string
+    sql: case
+          when datediff(day, to_date(${due_raw}), current_date)  < 0 then '< 0.0'
+          when datediff(day, to_date(${due_raw}), current_date)  >= 0 and datediff(day, to_date(${due_raw}), current_date)  < 30 then '>= 0.0 and < 30.0'
+          when datediff(day, to_date(${due_raw}), current_date)  >= 30 and datediff(day, to_date(${due_raw}), current_date)  < 60 then '>= 30.0 and < 60.0'
+          when datediff(day, to_date(${due_raw}), current_date)  >= 60 and datediff(day, to_date(${due_raw}), current_date)  < 90 then '>= 60.0 and < 90.0'
+          when datediff(day, to_date(${due_raw}), current_date)  >= 90 then '>= 90.0'
+          else 'Undefined' end;;
+  }
+
   dimension: email {
     type: string
     sql: ${TABLE}."EMAIL" ;;
@@ -600,6 +611,11 @@ view: transactions {
   dimension: is_advanced_intercompany {
     type: string
     sql: ${TABLE}."IS_ADVANCED_INTERCOMPANY" ;;
+  }
+
+  dimension: is_transaction_intercompany {
+    type: yesno
+    sql: lower(${is_advanced_intercompany})='yes' OR lower(${is_intercompany})='yes' ;;
   }
 
   dimension: is_autocalculate_lag {

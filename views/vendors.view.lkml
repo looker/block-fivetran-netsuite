@@ -131,7 +131,7 @@ view: vendors {
     sql: ${TABLE}."COMMENTS" ;;
   }
 
-  dimension: companyname {
+  dimension: vendor_name {
     type: string
     sql: ${TABLE}."COMPANYNAME" ;;
   }
@@ -613,7 +613,7 @@ view: vendors {
     fields: [
       vendor_id,
       full_name,
-      companyname,
+      vendor_name,
       tax_contact_first_name,
       lsa_link_name,
       name,
