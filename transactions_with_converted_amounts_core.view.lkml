@@ -149,4 +149,93 @@ view: transactions_with_converted_amounts {
       left join ${accounts.SQL_TABLE_NAME} as accounts on accounts.account_id = transactions_in_every_calculation_period_w_exchange_rates.account_id
        ;;
   }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
+
+  dimension: transaction_id {
+    type: number
+    sql: ${TABLE}."TRANSACTION_ID" ;;
+  }
+
+  dimension: transaction_line_id {
+    type: number
+    sql: ${TABLE}."TRANSACTION_LINE_ID" ;;
+  }
+
+  dimension: subsidiary_id {
+    type: number
+    sql: ${TABLE}."SUBSIDIARY_ID" ;;
+  }
+
+  dimension: account_id {
+    type: number
+    sql: ${TABLE}."ACCOUNT_ID" ;;
+  }
+
+  dimension: transaction_accounting_period_id {
+    type: number
+    sql: ${TABLE}."TRANSACTION_ACCOUNTING_PERIOD_ID" ;;
+  }
+
+  dimension: unconverted_amount {
+    type: number
+    sql: ${TABLE}."UNCONVERTED_AMOUNT" ;;
+  }
+
+  dimension: reporting_accounting_period_id {
+    type: string
+    sql: ${TABLE}."REPORTING_ACCOUNTING_PERIOD_ID" ;;
+  }
+
+  dimension: exchange_rate_reporting_period {
+    type: number
+    sql: ${TABLE}."EXCHANGE_RATE_REPORTING_PERIOD" ;;
+  }
+
+  dimension: exchange_rate_transaction_period {
+    type: number
+    sql: ${TABLE}."EXCHANGE_RATE_TRANSACTION_PERIOD" ;;
+  }
+
+  dimension: converted_amount_using_reporting_month {
+    type: number
+    sql: ${TABLE}."CONVERTED_AMOUNT_USING_REPORTING_MONTH" ;;
+  }
+
+  dimension: converted_amount_using_transaction_accounting_period {
+    type: number
+    sql: ${TABLE}."CONVERTED_AMOUNT_USING_TRANSACTION_ACCOUNTING_PERIOD" ;;
+  }
+
+  dimension: is_income_statement {
+    type: string
+    sql: ${TABLE}."IS_INCOME_STATEMENT" ;;
+  }
+
+  dimension: account_category {
+    type: string
+    sql: ${TABLE}."ACCOUNT_CATEGORY" ;;
+  }
+
+  set: detail {
+    fields: [
+      transaction_id,
+      transaction_line_id,
+      subsidiary_id,
+      account_id,
+      transaction_accounting_period_id,
+      unconverted_amount,
+      reporting_accounting_period_id,
+      exchange_rate_reporting_period,
+      exchange_rate_transaction_period,
+      converted_amount_using_reporting_month,
+      converted_amount_using_transaction_accounting_period,
+      is_income_statement,
+      account_category
+    ]
+  }
+
 }
