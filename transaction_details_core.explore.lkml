@@ -1,4 +1,5 @@
-explore: transaction_details_core {
-  label: "Transaction Details"
-  extension: required
-}
+# explore: transaction_details_core {
+#   view_name: transaction_details
+#   label: "Transaction Details"
+#   extension: required
+# }

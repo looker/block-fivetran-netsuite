@@ -1,11 +1,6 @@
-include: "//@{CONFIG_PROJECT_NAME}/transaction_details.view"
 
 view: transaction_details {
-  extends: [transaction_details_config]
-}
-
-view: transaction_details_core {
-  derived_table: {
+  derived_table: {#https://spreedly.cloud.looker.com/explore/netsuite_spreedly/transaction_lines?qid=GjAvQJHqXkoOaTv6Vjft8v
     sql:
       select
         transaction_lines.transaction_line_id,
@@ -79,8 +74,8 @@ view: transaction_details_core {
 
           else 'Undefined'
           end as days_past_due_date_tier
-      from @{SCHEMA_NAME}.transaction_lines
-      join @{SCHEMA_NAME}.transactions on transactions.transaction_id = transaction_lines.transaction_id
+      from ${transaction_lines.SQL_TABLE_NAME} as transaction_lines
+      join ${transactions.SQL_TABLE_NAME} as transactions on transactions.transaction_id = transaction_lines.transaction_id
         and not transactions._fivetran_deleted
       left join ${transactions_with_converted_amounts.SQL_TABLE_NAME} as transactions_with_converted_amounts
         on transactions_with_converted_amounts.transaction_line_id = transaction_lines.transaction_line_id
@@ -474,3 +469,160 @@ view: transaction_details_core {
     ]
   }
 }
+
+
+# If necessary, uncomment the line below to include explore_source.
+# include: "transaction_lines.explore.lkml"
+
+# view: add_a_unique_name_1602560943 {#https://spreedly.cloud.looker.com/explore/netsuite_spreedly/transaction_lines?qid=GjAvQJHqXkoOaTv6Vjft8v
+#   derived_table: {
+#     explore_source: transaction_lines {
+#       column: transaction_line_id {}
+#       column: memo {}
+#       column: is_transaction_non_posting {}
+#       column: transaction_id { field: transactions.transaction_id }
+#       column: status { field: transactions.status }
+#       column: trandate_time { field: transactions.trandate_time }
+#       column: due_time { field: transactions.due_time }
+#       column: transaction_type { field: transactions.transaction_type }
+#       column: is_transaction_intercompany { field: transactions.is_transaction_intercompany }
+#       column: ending_time { field: accounting_periods.ending_time }
+#       column: full_name { field: accounting_periods.full_name }
+#       column: name { field: accounting_periods.name }
+#       column: is_accounting_period_adjustment { field: accounting_periods.is_accounting_period_adjustment }
+#       column: is_accounting_period_closed { field: accounting_periods.is_accounting_period_closed }
+#       column: name { field: accounts.name }
+#       column: type_name { field: accounts.type_name }
+#       column: account_id { field: accounts.account_id }
+#       column: account_number { field: accounts.account_number }
+#       column: is_account_leftside { field: accounts.is_account_leftside }
+#       column: is_accounts_payable { field: accounts.is_accounts_payable }
+#       column: is_accounts_receivable { field: accounts.is_accounts_receivable }
+#       column: is_account_intercompany { field: accounts.is_account_intercompany }
+#       column: parent_account_name { field: accounts.parent_account_name }
+#       column: is_income_account { field: income_accounts.is_income_account }
+#       column: is_expense_account { field: expense_accounts.is_expense_account }
+#       column: company_name { field: customers.company_name }
+#       column: city { field: customers.city }
+#       column: state { field: customers.state }
+#       column: zipcode { field: customers.zipcode }
+#       column: country { field: customers.country }
+#       column: date_first_order_time { field: customers.date_first_order_time }
+#       column: name { field: items.name }
+#       column: type_name { field: items.type_name }
+#       column: sales_description { field: items.sales_description }
+#       column: name { field: locations.name }
+#       column: city { field: locations.city }
+#       column: country { field: locations.country }
+#       column: name { field: vendor_types.name }
+#       column: vendor_name { field: vendors.vendor_name }
+#       column: create_time { field: vendors.create_time }
+#       column: name { field: currencies.name }
+#       column: symbol { field: currencies.symbol }
+#       column: name { field: departments.name }
+#       column: name { field: subsidiaries.name }
+#       column: converted_amount { field: transactions_with_converted_amounts.converted_amount }
+#       column: transaction_amount {}
+#       column: days_past_due_date_tier { field: transactions.days_past_due_date_tier }
+#     }
+#   }
+#   dimension: transaction_line_id {
+#     type: number
+#   }
+#   dimension: memo {}
+#   dimension: is_transaction_non_posting {
+#     label: "Transaction Lines Is Transaction Non Posting (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: transaction_id {
+#     type: number
+#   }
+#   dimension: status {}
+#   dimension: trandate_time {
+#     type: date_time
+#   }
+#   dimension: due_time {
+#     type: date_time
+#   }
+#   dimension: transaction_type {}
+#   dimension: is_transaction_intercompany {
+#     label: "Transactions Is Transaction Intercompany (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: ending_time {
+#     type: date_time
+#   }
+#   dimension: full_name {}
+#   dimension: name {}
+#   dimension: is_accounting_period_adjustment {
+#     label: "Accounting Periods Is Accounting Period Adjustment (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: is_accounting_period_closed {
+#     label: "Accounting Periods Is Accounting Period Closed (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: name {}
+#   dimension: type_name {}
+#   dimension: account_id {
+#     type: number
+#   }
+#   dimension: account_number {}
+#   dimension: is_account_leftside {
+#     label: "Accounts Is Account Leftside (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: is_accounts_payable {
+#     label: "Accounts Is Accounts Payable (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: is_accounts_receivable {
+#     label: "Accounts Is Accounts Receivable (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: is_account_intercompany {
+#     label: "Accounts Is Account Intercompany (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: parent_account_name {}
+#   dimension: is_income_account {
+#     label: "Income Accounts Is Income Account (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: is_expense_account {
+#     label: "Expense Accounts Is Expense Account (Yes / No)"
+#     type: yesno
+#   }
+#   dimension: company_name {}
+#   dimension: city {}
+#   dimension: state {}
+#   dimension: zipcode {
+#     type: zipcode
+#   }
+#   dimension: country {}
+#   dimension: date_first_order_time {
+#     type: date_time
+#   }
+#   dimension: name {}
+#   dimension: type_name {}
+#   dimension: sales_description {}
+#   dimension: name {}
+#   dimension: city {}
+#   dimension: country {}
+#   dimension: name {}
+#   dimension: vendor_name {}
+#   dimension: create_time {
+#     type: date_time
+#   }
+#   dimension: name {}
+#   dimension: symbol {}
+#   dimension: name {}
+#   dimension: name {}
+#   dimension: converted_amount {
+#     type: number
+#   }
+#   dimension: transaction_amount {
+#     type: number
+#   }
+#   dimension: days_past_due_date_tier {}
+# }
