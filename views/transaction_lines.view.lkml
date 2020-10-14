@@ -3,8 +3,13 @@ view: transaction_lines {
     ;;
   drill_fields: [transaction_line_id]
 
-  dimension: transaction_line_id {
+  dimension: unique_key {
     primary_key: yes
+    type: number
+    sql: ${TABLE}."UNIQUE_KEY" ;;
+  }
+
+  dimension: transaction_line_id {
     type: number
     sql: ${TABLE}."TRANSACTION_LINE_ID" ;;
   }
@@ -923,11 +928,6 @@ view: transaction_lines {
     sql: ${TABLE}."TRANSFER_ORDER_LINE_TYPE" ;;
   }
 
-  dimension: unique_key {
-    type: number
-    sql: ${TABLE}."UNIQUE_KEY" ;;
-  }
-
   dimension: unit_cost_override {
     type: number
     sql: ${TABLE}."UNIT_COST_OVERRIDE" ;;
@@ -968,9 +968,14 @@ view: transaction_lines {
     sql: ${TABLE}."VSOE_PRICE" ;;
   }
 
-  measure: count {
+  measure: count_transaction_detail_records {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: count_transaction_lines {
+    type: count_distinct
+    sql: ${transaction_line_id} ;;
   }
 
   measure: sum_transaction_amount {

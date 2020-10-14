@@ -103,7 +103,7 @@
     explore: transaction_lines
     type: table
     fields: [items.name, transaction_lines.sum_transaction_amount,
-      transaction_lines.count]
+      transaction_lines.count_transaction_detail_records]
     filters:
       transactions.transaction_type: Sales Order
       income_accounts.is_income_account: 'Yes'
