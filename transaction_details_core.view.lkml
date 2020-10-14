@@ -474,7 +474,7 @@ view: transaction_details {
 # If necessary, uncomment the line below to include explore_source.
 # include: "transaction_lines.explore.lkml"
 
-# view: add_a_unique_name_1602560943 {
+# view: add_a_unique_name_1602560943 {#https://spreedly.cloud.looker.com/explore/netsuite_spreedly/transaction_lines?qid=GjAvQJHqXkoOaTv6Vjft8v
 #   derived_table: {
 #     explore_source: transaction_lines {
 #       column: transaction_line_id {}

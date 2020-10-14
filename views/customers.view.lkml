@@ -185,7 +185,7 @@ view: customers {
     sql: ${TABLE}."COMMENTS" ;;
   }
 
-  dimension: company_name {
+  dimension: customer_company_name {
     type: string
     sql: ${TABLE}."COMPANYNAME" ;;
   }
@@ -1202,7 +1202,7 @@ view: customers {
       tax_contact_last_name,
       full_name,
       name,
-      company_name,
+      customer_company_name,
       lsa_link_name,
       lastname,
       tax_contact_middle_name,

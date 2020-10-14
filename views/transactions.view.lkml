@@ -1160,7 +1160,7 @@ view: transactions {
     sql: ${TABLE}."TOTAL_AFTER_DISCOUNT" ;;
   }
 
-  dimension_group: trandate {
+  dimension_group: transaction {
     type: time
     timeframes: [
       raw,

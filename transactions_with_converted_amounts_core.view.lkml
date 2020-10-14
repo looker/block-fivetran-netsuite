@@ -227,6 +227,13 @@ view: transactions_with_converted_amounts {
     type: string
     sql: ${TABLE}."ACCOUNT_CATEGORY" ;;
   }
+  measure: sum_transaction_converted_amount {
+    type: sum
+    value_format_name: usd
+    sql: ${converted_amount} ;;
+    drill_fields: [detail*]
+  }
+
 
   set: detail {
     fields: [

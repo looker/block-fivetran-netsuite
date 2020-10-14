@@ -970,6 +970,61 @@ view: transaction_lines {
 
   measure: count {
     type: count
-    drill_fields: [transaction_line_id, transactions.lsa_link_name, transactions.payment_transaction_id]
+    drill_fields: [detail*]
   }
+
+  measure: sum_transaction_amount {
+    type: sum
+    value_format_name: usd
+    sql: ${transaction_amount} ;;
+    drill_fields: [detail*]
+  }
+
+
+
+  set: detail {
+    fields: [
+      transaction_id,
+      transaction_line_id,
+      transaction_amount,
+      memo,
+      accounting_periods.ending_month,
+      accounting_periods.full_name,
+      accounting_periods.name,
+      accounting_periods.is_accounting_period_adjustment,
+      accounting_periods.is_accounting_period_closed,
+      transactions.transaction_date,
+      transactions.transaction_type,
+      accounts.name,
+      accounts.type_name,
+      accounts.account_id,
+      accounts.account_number,
+      accounts.is_accounts_payable,
+      accounts.is_accounts_receivable,
+      accounts.parent_account_name,
+      income_accounts.is_income_account,
+      expense_accounts.is_expense_account,
+      customers.customer_company_name,
+      customers.city,
+      customers.state,
+      customers.zipcode,
+      customers.country,
+      customers.date_first_order_date,
+      items.name,
+      items.type_name,
+      items.sales_description,
+      locations.name,
+      locations.city,
+      locations.country,
+      vendor_types.name,
+      vendors.vendor_name,
+      vendors.vendor_created_date,
+      currencies.name,
+      currencies.symbol,
+      departments.name,
+      subsidiaries.name,
+      transactions.days_past_due_date_tier
+    ]
+  }
+
 }
