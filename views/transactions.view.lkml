@@ -4,7 +4,7 @@ view: transactions {
   drill_fields: [payment_transaction_id]
 
   dimension: payment_transaction_id {
-    primary_key: yes
+    primary_key: yes #TODO AJC Needs verification
     type: string
     sql: ${TABLE}."PAYMENT_TRANSACTION_ID" ;;
   }
