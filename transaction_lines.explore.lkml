@@ -2,6 +2,7 @@ include: "/views/*.view"
 include: "*.view"
 
 explore: transaction_lines {
+  view_name: transaction_lines
   sql_always_where:
  (${accounting_periods.fiscal_calendar_id} is null
         or ${accounting_periods.fiscal_calendar_id}  = (select
