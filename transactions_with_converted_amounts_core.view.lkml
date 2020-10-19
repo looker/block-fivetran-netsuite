@@ -219,8 +219,8 @@ view: transactions_with_converted_amounts {
   }
 
   dimension: is_income_statement {
-    type: string
-    sql: ${TABLE}."IS_INCOME_STATEMENT" ;;
+    type: yesno
+    sql: ${TABLE}."IS_INCOME_STATEMENT"='true' ;;
   }
 
   dimension: account_category {
