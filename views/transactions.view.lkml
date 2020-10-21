@@ -1,4 +1,5 @@
-view: transactions {
+view: transactions_netsuite {
+  view_label: "Transactions"
   sql_table_name: @{SCHEMA_NAME}."TRANSACTIONS"
     ;;
   drill_fields: [payment_transaction_id]

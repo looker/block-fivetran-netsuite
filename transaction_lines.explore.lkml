@@ -12,6 +12,7 @@ explore: transaction_lines {
   )
   ;;
   join: transactions {
+    from: transactions_netsuite
     type: left_outer #TODO AJC This was actually listed as just "join" but i don't know the snowflake default
     sql_on: ${transactions.transaction_id} = ${transaction_lines.transaction_id}
     and not ${transactions._fivetran_deleted} ;;
