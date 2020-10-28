@@ -1,4 +1,4 @@
-view: accounts {
+view: accounts_netsuite {
   sql_table_name: @{SCHEMA_NAME}."ACCOUNTS"
     ;;
   drill_fields: [account_id]

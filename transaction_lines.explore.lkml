@@ -27,12 +27,13 @@ explore: transaction_lines {
 relationship: many_to_many #TODO AJC Needs confirmation
   }
   join: accounts {
+    from: accounts_netsuite
     type: left_outer
     sql_on: ${transaction_lines.account_id} = ${accounts.account_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
   join: parent_account {
-    from: accounts
+    from: accounts_netsuite
     sql_on: ${accounts.parent_id} = ${parent_account.account_id} ;;
     relationship: many_to_one #TODO AJC needs confirmation
   }
