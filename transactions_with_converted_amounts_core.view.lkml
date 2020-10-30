@@ -45,7 +45,7 @@ view: accountxperiod_exchange_rate_map {
             when lower(accounts.general_rate_type) = 'average' then period_exchange_rate_map.average_rate
             else null
             end as exchange_rate
-        from ${accounts.SQL_TABLE_NAME} as accounts
+        from @{SCHEMA_NAME}."ACCOUNTS" as accounts
         cross join ${period_exchange_rate_map.SQL_TABLE_NAME} as period_exchange_rate_map
     ;;
   }
@@ -64,7 +64,7 @@ view: transaction_lines_w_accounting_period {
           transactions.accounting_period_id as transaction_accounting_period_id,
           coalesce(transaction_lines.amount, 0) as unconverted_amount
         from ${transaction_lines.SQL_TABLE_NAME} as transaction_lines
-        join ${transactions.SQL_TABLE_NAME} as transactions on transactions.transaction_id = transaction_lines.transaction_id
+        join @{SCHEMA_NAME}."TRANSACTIONS" as transactions on transactions.transaction_id = transaction_lines.transaction_id
         where not transactions._fivetran_deleted
           and lower(transactions.transaction_type) != 'revenue arrangement'
           and lower(non_posting_line) != 'yes'
@@ -146,7 +146,7 @@ view: transactions_with_converted_amounts {
           when lower(accounts.type_name) in ('equity', 'retained earnings', 'net income') then 'Equity'
           else null end as account_category
       from ${transactions_in_every_calculation_period_w_exchange_rates.SQL_TABLE_NAME} as transactions_in_every_calculation_period_w_exchange_rates
-      left join ${accounts.SQL_TABLE_NAME} as accounts on accounts.account_id = transactions_in_every_calculation_period_w_exchange_rates.account_id
+      left join @{SCHEMA_NAME}."ACCOUNTS" as accounts on accounts.account_id = transactions_in_every_calculation_period_w_exchange_rates.account_id
        ;;
   }
 

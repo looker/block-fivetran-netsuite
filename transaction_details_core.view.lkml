@@ -75,7 +75,7 @@ view: transaction_details {
           else 'Undefined'
           end as days_past_due_date_tier
       from ${transaction_lines.SQL_TABLE_NAME} as transaction_lines
-      join ${transactions.SQL_TABLE_NAME} as transactions on transactions.transaction_id = transaction_lines.transaction_id
+      join @{SCHEMA_NAME}."TRANSACTIONS" as transactions on transactions.transaction_id = transaction_lines.transaction_id
         and not transactions._fivetran_deleted
       left join ${transactions_with_converted_amounts.SQL_TABLE_NAME} as transactions_with_converted_amounts
         on transactions_with_converted_amounts.transaction_line_id = transaction_lines.transaction_line_id
