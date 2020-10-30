@@ -155,6 +155,13 @@ view: transactions_with_converted_amounts {
     drill_fields: [detail*]
   }
 
+  dimension: primary_key {
+    primary_key: yes #https://spreedly.cloud.looker.com/sql/rzgvvmbdsym8g8
+    type: string
+    hidden: yes
+    sql: ${transaction_id}||${transaction_line_id}||${reporting_accounting_period_id}||${transaction_accounting_period_id} ;;
+  }
+
   dimension: transaction_id {
     type: number
     sql: ${TABLE}."TRANSACTION_ID" ;;
