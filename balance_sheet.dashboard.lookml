@@ -5,7 +5,7 @@
   - name: ''
     type: text
     title_text: ''
-    body_text: <font color="#000000" size="6"><center><strong>ASSETS</center></strong></font>
+    body_text: <font color="#000000" size="6"><center><strong>ASSETS</strong></center></font>
     row: 9
     col: 0
     width: 24
@@ -13,7 +13,7 @@
   - name: 'placeholder_1'
     type: text
     title_text: ''
-    body_text: <font color="#000000" size="6"><center><strong>LIABILITIES & EQUITY</center></strong></font>
+    body_text: <font color="#000000" size="6"><center><strong>LIABILITIES & EQUITY</strong></center></font>
     row: 31
     col: 0
     width: 24
@@ -174,7 +174,7 @@
   - name: 'placeholder_2'
     type: text
     body_text: <font color="#000000" size="5"><center><strong>Last Month's Balance
-      Sheet Totals</center></strong></font>
+      Sheet Totals</strong></center></font>
     row: 0
     col: 0
     width: 24
