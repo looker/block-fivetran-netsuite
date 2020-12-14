@@ -1,0 +1,35 @@
+{
+  "label": "Netsuite",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "https://marketplace-api.looker.com/block-icons/OracleNetsuite.png",
+    "tagline": "The Fivetran block for Netsuite lets you easily visualize and analyze your Netsuite data."
+  },
+
+    "constants": {
+        "CONFIG_PROJECT_NAME": {
+            "label": "Config Project Name"
+        },
+        "CONNECTION_NAME": {
+            "label": "Connection name",
+            "value_constraint": "connection"
+        },
+        "SCHEMA_NAME": {
+            "label": "Schema Name"
+        }
+    },
+    "models": [
+        {
+            "name": "block_netsuite",
+            "connection_constant": "CONNECTION_NAME"
+        }
+    ],
+    "auxiliary_projects": [
+        {
+            "git_uri": "git://github.com/looker/block-fivetran-netsuite-config.git",
+            "git_ref": "0b94afa36bde4f547f0bdfeb902d7503940691bb",
+            "label": "Netsuite by Fivetran Config",
+            "constant_name": "CONFIG_PROJECT_NAME"
+        }
+    ]
+}
