@@ -434,7 +434,7 @@ view: transaction_details_core {
     description: "The cost to acquire a customer."
     type: number
     value_format_name: usd
-    sql:${sum_transaction_converted_amount}\NULLIF(COUNT(DISTINCT ${account_id}),0) ;;
+    sql: ${sum_transaction_converted_amount} / NULLIF(COUNT(DISTINCT ${account_id}),0) ;;
   }
 
   set: detail {
