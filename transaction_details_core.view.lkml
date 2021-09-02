@@ -1,7 +1,7 @@
-include: "//@{CONFIG_PROJECT_NAME}/transaction_details.view"
+# include: "//@{CONFIG_PROJECT_NAME}/transaction_details.view"
 
 view: transaction_details {
-  extends: [transaction_details_config]
+  extends: [transaction_details_core]
 }
 
 view: transaction_details_core {
@@ -424,12 +424,12 @@ view: transaction_details_core {
     sql: ${TABLE}.converted_amount ;;
     drill_fields: [detail*]
   }
-  
+
   measure: customer_acquisition_cost {
     description: "The cost to acquire a customer."
     type: number
     value_format_name: usd
-    sql:${sum_transaction_converted_amount}\NULLIF(COUNT(DISTINCT ${account_id}),0) ;;
+    sql:${sum_transaction_converted_amount} / NULLIF(COUNT(DISTINCT ${account_id}),0) ;;
   }
 
   measure: count {

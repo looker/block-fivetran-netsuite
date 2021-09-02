@@ -2,13 +2,13 @@ project_name: "block-fivetran-netsuite"
 
 ################ Constants ################
 
-constant: CONFIG_PROJECT_NAME {
-  value: "block-fivetran-netsuite-config"
-  export: override_required
-}
+# constant: CONFIG_PROJECT_NAME {
+#   value: "block-fivetran-netsuite-config"
+#   export: override_required
+# }
 
 constant: CONNECTION_NAME {
-  value: "select"
+  value: "fivetran-bq-project"
   export: override_required
 }
 
@@ -19,10 +19,10 @@ constant: SCHEMA_NAME {
 
 ################ Dependencies ################
 
-local_dependency: {
-  project: "@{CONFIG_PROJECT_NAME}"
+# local_dependency: {
+#   project: "@{CONFIG_PROJECT_NAME}"
 
-  override_constant: SCHEMA_NAME {
-    value: "@{SCHEMA_NAME}"
-  }
-}
+#   override_constant: SCHEMA_NAME {
+#     value: "@{SCHEMA_NAME}"
+#   }
+# }

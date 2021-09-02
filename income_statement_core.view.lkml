@@ -1,7 +1,7 @@
-include: "//@{CONFIG_PROJECT_NAME}/income_statement.view"
+# include: "//@{CONFIG_PROJECT_NAME}/income_statement.view"
 
 view: income_statement {
-  extends: [income_statement_config]
+  extends: [income_statement_core]
 }
 
 view: income_statement_core {
