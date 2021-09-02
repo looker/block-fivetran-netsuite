@@ -436,6 +436,13 @@ view: transaction_details_core {
     type: count
     drill_fields: [detail*]
   }
+  
+  measure: customer_acquisition_cost {
+    description: "The cost to acquire a customer."
+    type: number
+    value_format_name: usd
+    sql: ${sum_transaction_converted_amount} / NULLIF(COUNT(DISTINCT ${account_id}),0) ;;
+  }
 
   set: detail {
     fields: [
