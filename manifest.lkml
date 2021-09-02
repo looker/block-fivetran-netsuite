@@ -13,7 +13,7 @@ constant: CONNECTION_NAME {
 }
 
 constant: SCHEMA_NAME {
-  value: "netsuite"
+  value: "netsuite_suiteanalytics"
   export: override_required
 }
 
