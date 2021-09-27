@@ -7,9 +7,6 @@
   },
 
     "constants": {
-        "CONFIG_PROJECT_NAME": {
-            "label": "Config Project Name"
-        },
         "CONNECTION_NAME": {
             "label": "Connection name",
             "value_constraint": "connection"
@@ -20,16 +17,8 @@
     },
     "models": [
         {
-            "name": "block_netsuite",
+            "name": "block_netsuite_v2",
             "connection_constant": "CONNECTION_NAME"
-        }
-    ],
-    "auxiliary_projects": [
-        {
-            "git_uri": "git://github.com/looker/block-fivetran-netsuite-config.git",
-            "git_ref": "0b94afa36bde4f547f0bdfeb902d7503940691bb",
-            "label": "Netsuite by Fivetran Config",
-            "constant_name": "CONFIG_PROJECT_NAME"
         }
     ]
 }

@@ -1,10 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/transactions_with_converted_amounts.view"
-
 view: transactions_with_converted_amounts {
-  extends: [transactions_with_converted_amounts_config]
-}
-
-view: transactions_with_converted_amounts_core {
   derived_table: {
     sql:
       with period_exchange_rate_map as ( -- exchange rates used, by accounting period, to convert to parent subsidiary

@@ -4,7 +4,7 @@
   elements:
   - title: Income Statement
     name: Income Statement
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: income_statement
     type: looker_grid
     fields: [income_statement.income_statement_sort_helper, income_statement.account_type_name,
@@ -69,7 +69,7 @@
     height: 9
   - title: Income Trend
     name: Income Trend
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: income_statement
     type: looker_line
     fields: [income_statement.sum_converted_amount, income_statement.accounting_period_ending_month,
@@ -170,7 +170,7 @@
     height: 10
   - title: Expense Trend
     name: Expense Trend
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: income_statement
     type: looker_line
     fields: [income_statement.sum_converted_amount, income_statement.accounting_period_ending_month,
@@ -279,7 +279,7 @@
     default_value: 2019/05/01 to 2019/09/30
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: income_statement
     listens_to_filters: []
     field: income_statement.accounting_period_ending_month
@@ -289,7 +289,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: income_statement
     listens_to_filters: []
     field: income_statement.is_accounting_period_closed
