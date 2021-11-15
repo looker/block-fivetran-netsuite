@@ -4,7 +4,7 @@
   elements:
   - title: Open Accounts Receivable Balance
     name: Open Accounts Receivable Balance
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     type: single_value
     fields: [transaction_details.sum_transaction_converted_amount]
@@ -26,7 +26,7 @@
     height: 4
   - title: Aging Summary
     name: Aging Summary
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     type: table
     fields: [transaction_details.days_past_due_date_tier, transaction_details.sum_transaction_converted_amount]
@@ -59,7 +59,7 @@
     height: 4
   - title: Upcoming Invoices
     name: Upcoming Invoices
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     type: table
     fields: [transaction_details.customer_name, transaction_details.transaction_due_date,
@@ -97,7 +97,7 @@
     height: 19
   - title: Overdue Invoices
     name: Overdue Invoices
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     type: table
     fields: [transaction_details.customer_name, transaction_details.transaction_due_date,
@@ -140,7 +140,7 @@
     default_value: Open
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.transaction_status
@@ -150,7 +150,7 @@
     default_value: 'Yes'
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_accounts_receivable
@@ -160,7 +160,7 @@
     default_value: Invoice,Credit Memo
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.transaction_type
@@ -170,7 +170,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_transaction_intercompany
@@ -180,7 +180,7 @@
     default_value: 'No'
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.is_account_intercompany
@@ -190,7 +190,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.account_name
@@ -200,7 +200,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.subsidiary_name
@@ -210,7 +210,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: block_netsuite
+    model: block_netsuite_v2
     explore: transaction_details
     listens_to_filters: []
     field: transaction_details.customer_name
